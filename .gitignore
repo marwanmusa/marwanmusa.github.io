@@ -5,7 +5,7 @@
 **/yarn-error.log*
 **/lerna-debug.log*
 .next/
-# out/
+out/
 build/
 .DS_Store
 *.pem
