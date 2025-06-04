@@ -58,7 +58,7 @@ export default function HeroSection() {
               </div>
               <div className="flex items-center gap-2">
                 <FaEnvelope className="text-primary" />
-                <span>marwanmusa@gmail.com</span>
+                <span>marwanlmusa@gmail.com</span>
               </div>
             </div>
 

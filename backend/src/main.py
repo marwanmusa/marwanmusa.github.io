@@ -15,7 +15,7 @@ CORS(app)  # Enable CORS for all routes
 # Configuration
 EMAIL_ADDRESS = os.getenv('EMAIL_ADDRESS', 'example@gmail.com')
 EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD', 'password')
-RECIPIENT_EMAIL = os.getenv('RECIPIENT_EMAIL', 'marwanmusa@gmail.com')
+RECIPIENT_EMAIL = os.getenv('RECIPIENT_EMAIL', 'marwanlmusa@gmail.com')
 
 @app.route('/api/contact', methods=['POST'])
 def contact():
