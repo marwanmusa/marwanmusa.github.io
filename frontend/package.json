@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build && rimraf ../docs && node -e \"const fs = require('fs-extra'); fs.ensureDirSync('../docs'); fs.copySync('out', '../docs', { overwrite: true });\"",
+    "build": "next build && rimraf ../docs && node -e \"const fs = require('fs-extra'); fs.ensureDirSync('../docs'); fs.copySync('out', '../docs', { overwrite: true }); fs.writeFileSync('../docs/.nojekyll', '')\"",
     "start": "next start",
     "lint": "next lint"
   },
