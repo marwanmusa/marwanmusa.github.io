@@ -221,7 +221,7 @@ export default function ContactSectionEmailJS() {
                   <h4 className="font-semibold text-gray-800 mb-4">Connect With Me</h4>
                   <div className="flex space-x-4">
                     <a
-                      href="https://linkedin.in/marwanmusa"
+                      href="https://www.linkedin.com/in/marwanmusa/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="bg-primary/10 p-3 rounded-full text-primary hover:bg-primary hover:text-white transition-colors"

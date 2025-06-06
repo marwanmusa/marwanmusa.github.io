@@ -65,7 +65,7 @@ export default function HeroSection() {
             {/* Social Links */}
             <div className="flex gap-4 mb-8 justify-center md:justify-start">
               <a
-                href="https://linkedin.in/marwanmusa"
+                href="https://www.linkedin.com/in/marwanmusa/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-700 hover:text-primary transition-colors"
