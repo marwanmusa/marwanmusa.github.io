@@ -7,7 +7,7 @@ import ExperienceSection from './components/ExperienceSection';
 import ProjectsSection from './components/ProjectsSection';
 import SkillsSection from './components/SkillsSection';
 import TrainingSection from './components/TrainingSection';
-import ContactSection from './components/ContactSection';
+import ContactSectionEmailJS from './components/ContactSectionEmailJS';
 import Footer from './components/Footer';
 
 export default function Home() {
@@ -20,7 +20,7 @@ export default function Home() {
       <ProjectsSection />
       <SkillsSection />
       <TrainingSection />
-      <ContactSection />
+      <ContactSectionEmailJS />
       <Footer />
     </main>
   );

@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
+import { emailJSConfig } from '../lib/config';
 
-export default function ContactSection() {
+export default function ContactSectionEmailJS() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,44 +34,39 @@ export default function ContactSection() {
     setFormStatus(prev => ({ ...prev, isSubmitting: true }));
 
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      await emailjs.send(
+        emailJSConfig.serviceId,
+        emailJSConfig.templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_email: 'marwanlmusa@gmail.com'
         },
-        body: JSON.stringify(formData),
+        emailJSConfig.publicKey
+      );
+
+      setFormStatus({
+        submitted: true,
+        success: true,
+        message: 'Thank you for your message! I will get back to you soon.',
+        isSubmitting: false
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setFormStatus({
-          submitted: true,
-          success: true,
-          message: data.message || 'Thank you for your message! I will get back to you soon.',
-          isSubmitting: false
-        });
-
-        // Reset form after successful submission
-        setFormData({
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
-        });
-      } else {
-        setFormStatus({
-          submitted: true,
-          success: false,
-          message: data.message || 'Something went wrong. Please try again later.',
-          isSubmitting: false
-        });
-      }
+      // Reset form after successful submission
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
     } catch {
+      console.log('Email sending failed');
       setFormStatus({
         submitted: true,
         success: false,
-        message: "Failed to connect to the server. Please try again later.",
+        message: "Failed to send message. Please try again later.",
         isSubmitting: false
       });
     }
@@ -248,4 +245,4 @@ export default function ContactSection() {
       </div>
     </section>
   );
-}
+} 
