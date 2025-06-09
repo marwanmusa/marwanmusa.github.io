@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   pageExtensions: ["tsx", "ts", "js", "jsx", "mdx"],
+  turbopack: {
+    resolveAlias: {
+      "next-mdx-import-source-file": "./src/mdx-components.tsx",
+    },
+  },
 };
 
 export default withMDX(nextConfig);
