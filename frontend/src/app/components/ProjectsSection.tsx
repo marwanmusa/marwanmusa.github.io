@@ -2,53 +2,30 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { getAssetPath } from '../lib/utils';
-
-const projects = [
-  {
-    title: "Hydropower Portal",
-    description: "Comprehensive web portal for managing hydropower projects",
-    technologies: ["Python", "C++", "Django", "DRF", "PostgreSQL", "Pandas", "Numpy"],
-    highlights: [
-      "7 core modules including Dashboard Analysis, Financial Analysis",
-      "Complex engineering and financial calculations",
-      "Team leadership of 5 developers"
-    ],
-    image: getAssetPath("/images/projects/hydropower-portal.png"),
-    githubUrl: "https://gitlab.baezeni.net/",
-    liveUrl: "https://tinfosportal.z23.web.core.windows.net/"
-  },
-  {
-    title: "BZ-Publish AI Features",
-    description: "AI enhancements for financial platform",
-    technologies: ["Python", "Django", "Prophet", "Selenium", "BeautifulSoup", "OpenAI API"],
-    highlights: [
-      "Time-series forecasting model",
-      "AI-powered chatbot with OpenAI integration",
-      "Automated data scraping system"
-    ],
-    image: getAssetPath("/images/projects/bz-publish.png"),
-    githubUrl: "https://gitlab.baezeni.net/",
-    liveUrl: "https://www.bzpublish.com/"
-  },
-  {
-    title: "Automated Coal Document Processing",
-    description: "OCR system for automating data extraction from coal shipment documents",
-    technologies: ["Python", "Tesseract OCR", "OpenCV", "pypdfium2", "SendGrid API", "Azure OCR"],
-    highlights: [
-      "OCR pipeline development",
-      "Automated data extraction with regex",
-      "Email notification system",
-      "Significant improvement in processing speed"
-    ],
-    image: getAssetPath("/images/projects/coal-document-processing.png"),
-    githubUrl: "https://gitlab.baezeni.net/",
-    liveUrl: "https://www.jawapower.co.id/"
-  }
-];
+import { projects } from '../data/projects';
 
 export default function ProjectsSection() {
+  const router = useRouter();
+
+  /**
+   * Handle click on project card to navigate to project detail page
+   * @param slug - The project slug for navigation
+   * @param event - The click event
+   */
+  const handleProjectClick = (slug: string, event: React.MouseEvent<HTMLDivElement>): void => {
+    // Prevent navigation if clicking on external links
+    const target = event.target as HTMLElement;
+    if (target.closest('a[href^="http"]')) {
+      return;
+    }
+    
+    // Navigate to project detail page using Next.js router
+    router.push(`/projects/${slug}`);
+  };
+
   return (
     <section id="projects" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -64,17 +41,18 @@ export default function ProjectsSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
           {projects.map((project, index) => (
-            <motion.div 
+            <motion.div
               key={index}
-              className="project-card"
+              className="project-card cursor-pointer"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              onClick={(e) => handleProjectClick(project.slug, e)}
             >
               <div className="relative h-48 w-full overflow-hidden">
                 <Image
-                  src={project.image}
+                  src={getAssetPath(project.image)}
                   alt={`${project.title} project thumbnail`}
                   fill
                   className="object-cover transition-transform duration-300 hover:scale-105"
@@ -108,6 +86,7 @@ export default function ProjectsSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center text-primary hover:text-primary/80 transition-colors"
+                    onClick={(e) => e.stopPropagation()}
                   >
                     <FaGithub className="mr-1" /> Code
                   </a>
@@ -116,6 +95,7 @@ export default function ProjectsSection() {
                     target="_blank"
                     rel="noopener noreferrer" 
                     className="flex items-center text-primary hover:text-primary/80 transition-colors"
+                    onClick={(e) => e.stopPropagation()}
                   >
                     <FaExternalLinkAlt className="mr-1" /> Live Demo
                   </a>

@@ -26,6 +26,11 @@ export const metadata: Metadata = {
   description: "Portfolio website of Marwan Musa, a Software & AI Engineer with expertise in ML/DL systems, data science, and software engineering.",
 };
 
+/**
+ * Root layout component for the application
+ * @param children - Child components to render within the layout
+ * @returns JSX element representing the root layout
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,7 +38,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${roboto.variable} ${jetbrainsMono.variable}`}>
+      <body 
+        className={`${inter.variable} ${roboto.variable} ${jetbrainsMono.variable}`}
+        suppressHydrationWarning={true}
+      >
         {children}
       </body>
     </html>

@@ -15,13 +15,45 @@ const navLinks = [
   { name: 'Contact', href: '#contact' },
 ];
 
+/**
+ * Navigation bar component with responsive design and scroll detection
+ * @returns JSX element representing the navigation bar
+ */
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
-  const [scrolled, setScrolled] = useState(false);
+  /**
+   * State for mobile menu visibility
+   */
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  
+  /**
+   * State for active section tracking
+   * Initialize with static value to prevent hydration mismatch
+   */
+  const [activeSection, setActiveSection] = useState<string>('home');
+  
+  /**
+   * State for navbar scroll styling
+   * Initialize with false to prevent hydration mismatch
+   */
+  const [scrolled, setScrolled] = useState<boolean>(false);
 
+  /**
+   * State to track if component has mounted (client-side only)
+   * This prevents server/client mismatch during hydration
+   */
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+
+  /**
+   * Effect to set mounted state and handle scroll detection
+   * Only runs on client side to prevent hydration issues
+   */
   useEffect(() => {
-    const handleScroll = () => {
+    setIsMounted(true);
+
+    const handleScroll = (): void => {
+      // Only run if window is available (client-side)
+      if (typeof window === 'undefined') return;
+
       // Update navbar style on scroll
       if (window.scrollY > 50) {
         setScrolled(true);
@@ -45,12 +77,24 @@ export default function Navbar() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Only add scroll listener if window is available
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll);
+      
+      // Call once to set initial state
+      handleScroll();
+      
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
   }, []);
 
+  // Consistent header class to prevent hydration mismatch
+  const headerClass = `fixed w-full z-50 transition-all duration-300 ${
+    isMounted && scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
+  }`;
+
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
+    <header className={headerClass}>
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="#home" className="text-xl font-bold text-primary">
           Marwan Musa
@@ -62,7 +106,9 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className={`nav-link ${activeSection === link.href.substring(1) ? 'active' : ''}`}
+              className={`nav-link ${
+                isMounted && activeSection === link.href.substring(1) ? 'active' : ''
+              }`}
             >
               {link.name}
             </Link>
@@ -73,13 +119,14 @@ export default function Navbar() {
         <button
           className="md:hidden text-gray-700 focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle mobile menu"
         >
           {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
       </div>
 
-      {/* Mobile Navigation Menu */}
-      {isOpen && (
+      {/* Mobile Navigation Menu - Only render if mounted to prevent hydration mismatch */}
+      {isMounted && isOpen && (
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -92,7 +139,9 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`nav-link ${activeSection === link.href.substring(1) ? 'active' : ''}`}
+                  className={`nav-link ${
+                    activeSection === link.href.substring(1) ? 'active' : ''
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {link.name}
