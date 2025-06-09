@@ -1,1 +1,14 @@
-# How to run this project\n\n## Frontend\n1. Navigate to the frontend directory\n2. Run `npm install` to install dependencies\n3. Run `npm run dev` to start the development server\n\n## Backend\n1. Navigate to the backend directory\n2. Create a virtual environment: `python -m venv venv`\n3. Activate the virtual environment: `source venv/bin/activate` (Linux/Mac) or `venv\Scripts\activate` (Windows)\n4. Install dependencies: `pip install -r requirements.txt`\n5. Create a .env file based on .env.example\n6. Run `python src/main.py` to start the backend server
+# How to run this project
+
+## Frontend
+1. Navigate to the frontend directory
+2. Run `npm install` to install dependencies
+3. Run `npm run dev` to start the development server
+
+## Backend
+1. Navigate to the backend directory
+2. Create a virtual environment: `python -m venv venv`
+3. Activate the virtual environment: `source venv/bin/activate` (Linux/Mac) or `venv\Scripts\activate` (Windows)
+4. Install dependencies: `pip install -r requirements.txt`
+5. Create a .env file based on .env.example
+6. Run `python src/main.py` to start the backend server
