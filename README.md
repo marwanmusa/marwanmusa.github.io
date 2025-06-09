@@ -7,12 +7,12 @@ This repository contains a comprehensive portfolio website for Marwan Musa, a So
 The project is divided into two main parts:
 
 1. **Frontend (Next.js & Tailwind CSS)**
-   - Located in the `/portfolio` directory
+   - Located in the `/frontend` directory
    - Responsive design with animations using Framer Motion
    - Sections: Hero, About, Experience, Projects, Skills, Training, Contact
 
 2. **Backend (Python/Flask)**
-   - Located in the `/portfolio-backend` directory
+   - Located in the `/backend` directory
    - API endpoint for contact form submissions
    - CORS handling for frontend-backend communication
 
@@ -22,7 +22,7 @@ The project is divided into two main parts:
 
 1. Navigate to the backend directory:
    ```
-   cd portfolio-backend
+   cd backend
    ```
 
 2. Activate the virtual environment:
@@ -46,7 +46,7 @@ The project is divided into two main parts:
 
 1. Navigate to the frontend directory:
    ```
-   cd portfolio
+   cd frontend
    ```
 
 2. Install dependencies (if not already done):
@@ -91,9 +91,9 @@ The Flask backend can be deployed to services like Heroku, AWS, or Google Cloud:
 
 ## Customization
 
-- **Images**: Replace placeholder images in the `/portfolio/public` directory with actual project screenshots and profile photo
+- **Images**: Replace placeholder images in the `/frontend/public` directory with actual project screenshots and profile photo
 - **Content**: Update the data in component files to reflect any changes to your experience or projects
-- **Styling**: Modify the color scheme and typography in `/portfolio/src/app/globals.css`
+- **Styling**: Modify the color scheme and typography in `/frontend/src/app/globals.css`
 
 ## Features
 
