@@ -2,51 +2,10 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { getAssetPath } from '../lib/utils';
-
-const projects = [
-  {
-    title: "Hydropower Portal",
-    description: "Comprehensive web portal for managing hydropower projects",
-    technologies: ["Python", "C++", "Django", "DRF", "PostgreSQL", "Pandas", "Numpy"],
-    highlights: [
-      "7 core modules including Dashboard Analysis, Financial Analysis",
-      "Complex engineering and financial calculations",
-      "Team leadership of 5 developers"
-    ],
-    image: getAssetPath("/images/projects/hydropower-portal.png"),
-    githubUrl: "https://gitlab.baezeni.net/",
-    liveUrl: "https://tinfosportal.z23.web.core.windows.net/"
-  },
-  {
-    title: "BZ-Publish AI Features",
-    description: "AI enhancements for financial platform",
-    technologies: ["Python", "Django", "Prophet", "Selenium", "BeautifulSoup", "OpenAI API"],
-    highlights: [
-      "Time-series forecasting model",
-      "AI-powered chatbot with OpenAI integration",
-      "Automated data scraping system"
-    ],
-    image: getAssetPath("/images/projects/bz-publish.png"),
-    githubUrl: "https://gitlab.baezeni.net/",
-    liveUrl: "https://www.bzpublish.com/"
-  },
-  {
-    title: "Automated Coal Document Processing",
-    description: "OCR system for automating data extraction from coal shipment documents",
-    technologies: ["Python", "Tesseract OCR", "OpenCV", "pypdfium2", "SendGrid API", "Azure OCR"],
-    highlights: [
-      "OCR pipeline development",
-      "Automated data extraction with regex",
-      "Email notification system",
-      "Significant improvement in processing speed"
-    ],
-    image: getAssetPath("/images/projects/coal-document-processing.png"),
-    githubUrl: "https://gitlab.baezeni.net/",
-    liveUrl: "https://www.jawapower.co.id/"
-  }
-];
+import { projects } from '../data/projects';
 
 export default function ProjectsSection() {
   return (
@@ -64,7 +23,7 @@ export default function ProjectsSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
           {projects.map((project, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               className="project-card"
               initial={{ opacity: 0, y: 20 }}
@@ -72,20 +31,21 @@ export default function ProjectsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="relative h-48 w-full overflow-hidden">
-                <Image
-                  src={project.image}
-                  alt={`${project.title} project thumbnail`}
-                  fill
-                  className="object-cover transition-transform duration-300 hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority={index < 3}
-                />
-              </div>
+              <Link href={`/projects/${project.slug}`}>
+                <div className="relative h-48 w-full overflow-hidden">
+                  <Image
+                    src={getAssetPath(project.image)}
+                    alt={`${project.title} project thumbnail`}
+                    fill
+                    className="object-cover transition-transform duration-300 hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority={index < 3}
+                  />
+                </div>
 
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-primary mb-2">{project.title}</h3>
-                <p className="text-gray-700 mb-4">{project.description}</p>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-primary mb-2">{project.title}</h3>
+                  <p className="text-gray-700 mb-4">{project.description}</p>
 
                 <div className="mb-4">
                   <h4 className="font-semibold text-gray-800 mb-2">Key Features:</h4>
@@ -120,7 +80,8 @@ export default function ProjectsSection() {
                     <FaExternalLinkAlt className="mr-1" /> Live Demo
                   </a>
                 </div>
-              </div>
+                </div>
+              </Link>
             </motion.div>
           ))}
         </div>
