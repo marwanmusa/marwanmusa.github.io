@@ -87,4 +87,5 @@ coverage/
 
 # Flask / Werkzeug
 instance/*
-!instance/.keep 
+!instance/.keep
+!frontend/src/app/lib/
