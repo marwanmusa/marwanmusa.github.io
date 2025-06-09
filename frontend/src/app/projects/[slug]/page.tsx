@@ -5,6 +5,12 @@ import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { projects } from '../../data/projects';
 import { getAssetPath } from '../../lib/utils';
 
+const mdxMap: Record<string, () => Promise<{ default: React.ComponentType }>> = {
+  'hydropower-portal': () => import('../../content/projects/hydropower-portal.mdx'),
+  'bz-publish-ai-features': () => import('../../content/projects/bz-publish-ai-features.mdx'),
+  'coal-document-processing': () => import('../../content/projects/coal-document-processing.mdx'),
+};
+
 export function generateStaticParams() {
   return projects.map(p => ({ slug: p.slug }));
 }
@@ -13,11 +19,14 @@ interface Props {
   params: { slug: string };
 }
 
-export default function ProjectPage({ params }: Props) {
+export default async function ProjectPage({ params }: Props) {
   const project = projects.find(p => p.slug === params.slug);
   if (!project) {
     notFound();
   }
+
+  const MDXModule = mdxMap[params.slug] ? await mdxMap[params.slug]() : null;
+  const MDXContent = MDXModule ? MDXModule.default : null;
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -71,6 +80,12 @@ export default function ProjectPage({ params }: Props) {
             <FaExternalLinkAlt className="mr-1" /> Live Demo
           </a>
         </div>
+
+        {MDXContent && (
+          <article className="prose prose-slate mt-10">
+            <MDXContent />
+          </article>
+        )}
       </div>
     </div>
   );
