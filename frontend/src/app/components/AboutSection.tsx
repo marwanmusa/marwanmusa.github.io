@@ -25,7 +25,7 @@ export default function AboutSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <p className="text-lg mb-6 leading-relaxed">
-              I am a results-driven Software & AI Engineer with over 3 years of experience in designing and deploying end-to-end ML/DL systems for production environments. I have a proven track record of leading AI innovation, integrating advanced data science solutions into business-critical platforms, and mentoring diverse tech teams.
+              I am a results-driven Software & AI Engineer with 4+ years of experience in designing and deploying end-to-end ML/DL systems for production environments. I have a proven track record of leading AI innovation, integrating advanced data science solutions into business-critical platforms, and mentoring diverse tech teams.
             </p>
 
             <p className="text-lg mb-6 leading-relaxed">
