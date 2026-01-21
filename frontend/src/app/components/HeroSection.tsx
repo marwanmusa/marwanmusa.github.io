@@ -42,7 +42,7 @@ export default function HeroSection() {
               Software & AI Engineer
             </h2>
             <p className="text-lg mb-6 max-w-2xl">
-              Results-driven engineer with 3+ years of experience in designing and deploying end-to-end ML/DL systems. 
+              Results-driven engineer with 4+ years of experience in designing and deploying end-to-end ML/DL systems. 
               Passionate about leveraging AI to solve real-world challenges.
             </p>
 
